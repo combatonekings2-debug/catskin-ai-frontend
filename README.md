@@ -221,15 +221,15 @@ catskin-ai-frontend/
 
 ## ⚠️ Batasan Masalah & Catatan Medis (Disclaimer)
 
-1. Rekomendasi pengobatan yang disajikan pada sistem ini mengacu pada **Batasan Masalah 1.3 huruf f** dalam laporan penelitian tugas akhir, yang ditujukan sebagai **panduan informasi edukasi pertolongan pertama**, bukan sebagai pengganti resep definitif dokter hewan berlisensi.
+1. Rekomendasi pengobatan yang disajikan pada sistem ini mengacu pada dalam laporan penelitian tugas akhir, yang ditujukan sebagai **panduan informasi edukasi pertolongan pertama**, bukan sebagai pengganti resep definitif dokter hewan berlisensi.
 2. Segera bawa hewan peliharaan Anda ke klinik dokter hewan atau rumah sakit hewan terdekat apabila lesi kulit kucing menunjukkan pendarahan hebat, nanah meluas, atau disertai penurunan nafsu makan yang drastis.
 
 ---
 
 ## 👨‍💻 Pengembang & Kontributor
 
-- **Pengembang:** Nahwand Naha Nidz (`combatonekings2-debug`)
-- **Pakar Rujukan Medis:** drh. Ismail Antarusmara (Surat Keterangan Validasi Ahli, 8 Juli 2026)
+- **Pengembang:** Naha Nidz (`combatonekings2-debug`)
+- **Pakar Rujukan Medis:** ada
 - **Repositori Backend:** [catskin-ai-backend](https://github.com/combatonekings2-debug/catskin-ai-backend)
 
 ---
