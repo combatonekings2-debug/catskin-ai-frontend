@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://04cae721032101.lhr.life/api/:path*"
+      "destination": "https://mlb-sperm-specs-liverpool.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",

@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://04cae721032101.lhr.life';
+const DIRECT_BACKEND = 'https://mlb-sperm-specs-liverpool.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {

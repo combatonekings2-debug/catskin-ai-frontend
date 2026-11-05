@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://04cae721032101.lhr.life/api';
+const DIRECT_BACKEND_URL = 'https://mlb-sperm-specs-liverpool.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
@@ -73,7 +73,7 @@ export async function healthCheck() {
 export async function isBackendAvailable() {
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 2000);
+    const timeoutId = setTimeout(() => controller.abort(), 6000);
     try {
       const res = await fetch(`${API_BASE_URL}/health`, { signal: controller.signal });
       const ct = res.headers.get('content-type') || '';
