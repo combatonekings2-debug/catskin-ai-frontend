@@ -23,6 +23,7 @@ const DemoDiagnosis = () => {
   const [isCameraActive, setIsCameraActive] = useState(false);
   const [cameraFacingMode, setCameraFacingMode] = useState('environment'); // 'environment' | 'user'
   const [cameraError, setCameraError] = useState(null);
+  const [isCameraLoading, setIsCameraLoading] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
 
   const sectionRef = useRef(null);
@@ -325,9 +326,11 @@ const DemoDiagnosis = () => {
       videoRef.current.srcObject = null;
     }
     setIsCameraActive(false);
+    setIsCameraLoading(false);
   }, []);
 
   const startCamera = useCallback(async (facing = cameraFacingMode) => {
+    setIsCameraLoading(true);
     stopCamera();
     setCameraError(null);
 
@@ -339,6 +342,7 @@ const DemoDiagnosis = () => {
         setCameraError('insecure_origin');
       } else {
         setCameraError('Browser Anda tidak mendukung akses kamera langsung. Silakan gunakan opsi Jepret Foto atau Pilih dari Galeri.');
+      setIsCameraLoading(false);
       }
       return;
     }
@@ -371,6 +375,7 @@ const DemoDiagnosis = () => {
         }
       }
       setIsCameraActive(true);
+      setIsCameraLoading(false);
       setCameraFacingMode(facing);
     } catch (err) {
       console.error('Gagal mengakses kamera:', err);
@@ -386,6 +391,7 @@ const DemoDiagnosis = () => {
       }
       setCameraError(msg);
       setIsCameraActive(false);
+    setIsCameraLoading(false);
     }
   }, [cameraFacingMode, stopCamera]);
 
@@ -426,6 +432,16 @@ const DemoDiagnosis = () => {
       }, 'image/jpeg', 0.95);
     }, 120);
   }, [isCameraActive, cameraFacingMode, stopCamera]);
+
+  // Pastikan stream kamera terhubung ke elemen video saat elemen baru di-mount
+  useEffect(() => {
+    if (inputMode === 'camera' && streamRef.current && videoRef.current) {
+      if (videoRef.current.srcObject !== streamRef.current) {
+        videoRef.current.srcObject = streamRef.current;
+        videoRef.current.play().catch(() => {});
+      }
+    }
+  }, [inputMode, isCameraActive]);
 
   // Bersihkan stream kamera saat unmount
   useEffect(() => {
@@ -470,6 +486,8 @@ const DemoDiagnosis = () => {
 
   const resetAnalysis = () => {
     stopCamera();
+    setInputMode('gallery');
+    setIsCameraLoading(false);
     setUploadedImage(null);
     setUploadedFile(null);
     setResult(null);
@@ -538,7 +556,7 @@ const DemoDiagnosis = () => {
                       type="button"
                       onClick={() => {
                         setInputMode('camera');
-                        startCamera();
+                        setTimeout(() => startCamera(), 100);
                       }}
                       className={`flex items-center gap-2 px-4 sm:px-6 py-2.5 rounded-xl font-medium text-xs sm:text-sm transition-all duration-200 ${
                         inputMode === 'camera'
@@ -584,7 +602,7 @@ const DemoDiagnosis = () => {
                         type="button"
                         onClick={() => {
                           setInputMode('camera');
-                          startCamera();
+                          setTimeout(() => startCamera(), 100);
                         }}
                         className="inline-flex items-center gap-1.5 text-xs sm:text-sm text-blue-600 hover:text-blue-700 font-medium hover:underline"
                       >
@@ -611,11 +629,31 @@ const DemoDiagnosis = () => {
                       />
 
                       {/* Loading / Inactive overlay */}
-                      {!isCameraActive && !cameraError && (
+                      {/* Loading State */}
+                      {isCameraLoading && (
                         <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-slate-900/90 p-6 text-center">
                           <Loader2 className="w-10 h-10 text-blue-400 animate-spin mb-3" />
                           <p className="text-sm sm:text-base font-medium">Mengaktifkan kamera perangkat...</p>
                           <p className="text-xs text-slate-400 mt-1 max-w-sm">Pastikan browser mengizinkan izin akses kamera saat diminta.</p>
+                        </div>
+                      )}
+
+                      {/* Inactive State */}
+                      {!isCameraActive && !isCameraLoading && !cameraError && (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-slate-900/90 p-6 text-center z-10">
+                          <div className="w-12 h-12 rounded-2xl bg-blue-600/30 border border-blue-500/40 flex items-center justify-center mb-3 text-blue-400">
+                            <Camera className="w-6 h-6" />
+                          </div>
+                          <p className="text-sm sm:text-base font-semibold mb-1">Kamera Siap Diaktifkan</p>
+                          <p className="text-xs text-slate-400 mb-4 max-w-xs">Tekan tombol di bawah untuk menyalakan kamera secara realtime.</p>
+                          <button
+                            type="button"
+                            onClick={() => startCamera()}
+                            className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-500 hover:to-teal-400 text-white text-xs sm:text-sm font-semibold rounded-xl shadow-lg transition-all inline-flex items-center gap-2"
+                          >
+                            <Camera className="w-4 h-4" />
+                            <span>Nyalakan Kamera</span>
+                          </button>
                         </div>
                       )}
 
@@ -822,7 +860,7 @@ const DemoDiagnosis = () => {
                       onClick={() => {
                         resetAnalysis();
                         if (inputMode === 'camera') {
-                          startCamera();
+                          setTimeout(() => startCamera(), 100);
                         }
                       }}
                       className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-slate-200"
@@ -965,7 +1003,7 @@ const DemoDiagnosis = () => {
                         onClick={() => {
                           resetAnalysis();
                           setInputMode('camera');
-                          startCamera();
+                          setTimeout(() => startCamera(), 100);
                         }}
                         className="flex-1 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white rounded-xl py-3 font-semibold shadow"
                       >
