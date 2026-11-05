@@ -125,6 +125,18 @@
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
 }
 
+/* Medical / AI scanner animation */
+@keyframes scan-sweep {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 0.9; }
+  80% { opacity: 0.9; }
+  100% { transform: translateY(280px); opacity: 0; }
+}
+
+.animate-scanner {
+  animation: scan-sweep 2.6s ease-in-out infinite;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
