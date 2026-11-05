@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'http://127.0.0.1:8000';
+const DIRECT_BACKEND = 'https://04cae721032101.lhr.life';
 
 async function request(path, options = {}) {
   const fetchOptions = {

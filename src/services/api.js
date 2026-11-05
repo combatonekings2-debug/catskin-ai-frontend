@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'http://127.0.0.1:8000/api';
+const DIRECT_BACKEND_URL = 'https://04cae721032101.lhr.life/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu

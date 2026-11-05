@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://04cae721032101.lhr.life/api/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }
