@@ -45,7 +45,7 @@ Sistem ini didukung oleh model pembelajaran mendalam (*Deep Learning*) arsitektu
 - 📸 **Kamera Realtime (WebRTC HTTPS):** Ambil foto langsung menggunakan kamera smartphone atau webcam laptop dengan panduan kotak fokus (*reticle guide*) dan tombol pemutar kamera (depan/belakang).
 - 📁 **Unggah dari Galeri / File:** Mendukung *drag and drop* atau pemilihan berkas foto berformat **JPG, PNG, dan WebP** (hingga ukuran 5MB).
 - 🧠 **Diagnosa CNN MobileNetV2 Otomatis:** Mengklasifikasikan kondisi lesi kulit kucing secara instan dengan skor keyakinan (*confidence score*) serta visualisasi grafik distribusi probabilitas Softmax untuk ke-5 kelas.
-- 💊 **Rekomendasi Terapi & Obat Medis:** Menyajikan langkah pertolongan pertama dan obat topikal/sistemik yang dirujuk dari pakar dokter hewan (**drh. Ismail Antarusmara**).
+- 💊 **Rekomendasi Terapi & Obat Medis:** Menyajikan langkah pertolongan pertama dan obat topikal/sistemik yang dirujuk dari pakar dokter hewan.
 - 🛡️ **Validasi Citra AI (Anti-OOD / Non-Cat Rejection):** Proteksi cerdas berlapis untuk menolak gambar yang bukan kulit kucing (seperti manusia, perabotan, kendaraan, atau ruangan) guna mencegah kesalahan diagnosa (*Garbage-In Garbage-Out*).
 - 📱 **Desain Responsif & Modern:** Tampilan elegan berbasis Tailwind CSS dan komponen Shadcn UI yang optimal diakses dari layar smartphone, tablet, maupun desktop.
 - 🛠️ **Admin Dashboard Lengkap:** Panel internal untuk manajemen data latih, retraining model, deployment model baru, serta unduh rekap riwayat diagnosa.
