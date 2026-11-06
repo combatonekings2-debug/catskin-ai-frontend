@@ -1,10 +1,10 @@
-/**
+﻿/**
  * API Service untuk CatSkin AI
- * URL relatif — request diteruskan lewat Vite proxy ke backend.
+ * URL relatif â€” request diteruskan lewat Vite proxy ke backend.
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://platinum-futures-boc-pal.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://echo-assume-saturn-astrology.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
@@ -156,3 +156,4 @@ export async function getSiteSettings() {
     return null;
   }
 }
+

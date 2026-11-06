@@ -1,11 +1,11 @@
-/**
- * Admin API — semua panggilan ke backend CatSkin AI
+﻿/**
+ * Admin API â€” semua panggilan ke backend CatSkin AI
  * Menggunakan URL relatif agar berjalan lewat Vite proxy (dev)
  * maupun di production tanpa perlu set VITE_API_URL.
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://platinum-futures-boc-pal.trycloudflare.com';
+const DIRECT_BACKEND = 'https://echo-assume-saturn-astrology.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
@@ -33,7 +33,7 @@ async function request(path, options = {}) {
   return directRes.json().catch(() => ({ success: true }));
 }
 
-// ── Dataset ──────────────────────────────────────────────────────────────────
+// â”€â”€ Dataset â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const datasetApi = {
   list:        ()                 => request('/api/admin/dataset'),
   delete:      (id)               => request(`/api/admin/dataset/${encodeURIComponent(id)}`, { method: 'DELETE' }),
@@ -52,7 +52,7 @@ export const datasetApi = {
   },
 };
 
-// ── Training ─────────────────────────────────────────────────────────────────
+// â”€â”€ Training â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const trainingApi = {
   start:  (config) => request('/api/admin/training/start', {
     method: 'POST',
@@ -63,7 +63,7 @@ export const trainingApi = {
   stop:   ()       => request('/api/admin/training/stop', { method: 'POST' }),
 };
 
-// ── Models ────────────────────────────────────────────────────────────────────
+// â”€â”€ Models â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const modelsApi = {
   list:     ()         => request('/api/admin/models'),
   deploy:   (filename) => request(`/api/admin/models/${encodeURIComponent(filename)}/deploy`, { method: 'POST' }),
@@ -76,7 +76,7 @@ export const modelsApi = {
   },
 };
 
-// ── Diagnosis ─────────────────────────────────────────────────────────────────
+// â”€â”€ Diagnosis â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const diagnosisApi = {
   list:   (params = {}) => {
     const qs = new URLSearchParams({
@@ -103,12 +103,12 @@ export const diagnosisApi = {
   },
 };
 
-// ── Stats ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Stats â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const statsApi = {
   get: () => request('/api/admin/stats'),
 };
 
-// ── Site & Footer Settings ───────────────────────────────────────────────────
+// â”€â”€ Site & Footer Settings â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const settingsApi = {
   get:    ()        => request('/api/settings'),
   update: (payload) => request('/api/admin/settings', {
@@ -117,3 +117,4 @@ export const settingsApi = {
     body: JSON.stringify(payload),
   }),
 };
+
