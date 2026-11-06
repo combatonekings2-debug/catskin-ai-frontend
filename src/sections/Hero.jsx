@@ -21,7 +21,7 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-[auto] lg:min-h-[calc(100vh-2.5rem)] 2xl:min-h-screen flex items-center pt-28 pb-8 sm:pt-28 sm:pb-10 md:pt-32 md:pb-12 lg:pt-28 lg:pb-12 xl:pt-32 xl:pb-16 2xl:pt-36 2xl:pb-20 overflow-hidden neural-bg">
+    <section id="hero" className="relative min-h-[100dvh] flex flex-col justify-center pt-24 pb-12 sm:pt-28 sm:pb-12 md:pt-32 md:pb-16 lg:min-h-[calc(100vh-2.5rem)] lg:pt-28 lg:pb-12 xl:pt-32 xl:pb-16 2xl:min-h-screen 2xl:pt-36 2xl:pb-20 overflow-hidden neural-bg">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/20 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-teal-400/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }} />
