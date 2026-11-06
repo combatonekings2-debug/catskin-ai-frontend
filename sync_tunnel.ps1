@@ -1,13 +1,18 @@
 ﻿# sync_tunnel.ps1 - Sinkronisasi Otomatis URL Cloudflare Tunnel ke Vercel & GitHub
 param(
-    [string]$RootDir = $PSScriptRoot
+    [string]$RootDir = ""
 )
 
 $ErrorActionPreference = "SilentlyContinue"
 
+if ([string]::IsNullOrWhiteSpace($RootDir)) {
+    $RootDir = $PSScriptRoot
+}
+$RootDir = $RootDir.Trim('"', "'").TrimEnd('\', '/')
+
 # Deteksi root folder jika skrip dijalankan dari dalam subfolder frontend
-if (Test-Path (Join-Path $PSScriptRoot "..\backend")) {
-    $RootDir = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+if (Test-Path (Join-Path $RootDir "..\backend")) {
+    $RootDir = (Resolve-Path (Join-Path $RootDir "..")).Path
 }
 
 $frontendDir = if (Test-Path (Join-Path $RootDir "frontend\vercel.json")) { Join-Path $RootDir "frontend" } else { $RootDir }

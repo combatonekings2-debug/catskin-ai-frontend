@@ -56,10 +56,10 @@ const Navigation = () => {
         ref={navRef}
         className={`fixed top-0 left-0 right-0 z-50 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-3'
-            : 'bg-transparent py-5'
+            ? 'bg-white/95 backdrop-blur-md shadow-md py-2.5 sm:py-3'
+            : 'bg-white/70 sm:bg-transparent backdrop-blur-md sm:backdrop-blur-none py-3.5 sm:py-5 border-b border-slate-200/40 sm:border-transparent'
         }`}
-        style={{ transition: 'background-color 0.2s ease, box-shadow 0.2s ease, padding 0.2s ease' }}
+        style={{ transition: 'background-color 0.2s ease, box-shadow 0.2s ease, padding 0.2s ease, border-color 0.2s ease' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">

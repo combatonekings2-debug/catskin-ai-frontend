@@ -30,6 +30,7 @@
 @layer base {
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
+  section[id] { scroll-margin-top: 5rem; }
   
   /* Skala proporsional untuk layar Laptop (1024px - 1440px atau tinggi viewport <= 820px)
      Mencegah tampilan tampak 'terlalu ngezoom' di layar laptop 1366x768 (SUDAH BENAR & PAS) */
