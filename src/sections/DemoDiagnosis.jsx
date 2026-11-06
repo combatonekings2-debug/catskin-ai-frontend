@@ -615,9 +615,9 @@ const DemoDiagnosis = () => {
 
                 {/* Mode 2: Kamera Realtime */}
                 {inputMode === 'camera' && (
-                  <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl min-h-[340px] sm:min-h-[420px] flex flex-col justify-between">
-                    {/* Live Viewfinder */}
-                    <div className="relative w-full aspect-video sm:aspect-[4/3] md:aspect-video bg-black flex items-center justify-center overflow-hidden">
+                  <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl flex flex-col">
+                    {/* Live Viewfinder - Tampilan Kamera Tinggi & Imersif untuk Mobile (3:4 portrait) */}
+                    <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[16/10] bg-black flex items-center justify-center overflow-hidden">
                       <video
                         ref={videoRef}
                         autoPlay
@@ -779,20 +779,20 @@ const DemoDiagnosis = () => {
                           </div>
 
                           {/* Focus reticle box */}
-                          <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-8">
-                            <div className="w-48 h-48 sm:w-60 sm:h-60 2xl:w-72 2xl:h-72 border-2 border-white/40 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.3)]">
+                          <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6 sm:p-8">
+                            <div className="w-56 h-56 sm:w-64 sm:h-64 2xl:w-72 2xl:h-72 border-2 border-white/50 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.35)]">
                               <div className="absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 border-blue-400 rounded-tl" />
                               <div className="absolute -top-1 -right-1 w-5 h-5 border-t-2 border-r-2 border-blue-400 rounded-tr" />
                               <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-2 border-l-2 border-blue-400 rounded-bl" />
                               <div className="absolute -bottom-1 -right-1 w-5 h-5 border-b-2 border-r-2 border-blue-400 rounded-br" />
                               <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-2 h-2 bg-blue-400/80 rounded-full" />
+                                <div className="w-2.5 h-2.5 bg-blue-400/80 rounded-full" />
                               </div>
                             </div>
                           </div>
 
-                          <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none">
-                            <p className="text-xs text-white/90 bg-black/60 backdrop-blur-sm inline-block px-3 py-1 rounded-full shadow">
+                          <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none px-4">
+                            <p className="text-xs text-white/95 bg-black/70 backdrop-blur-sm inline-block px-3.5 py-1.5 rounded-full shadow border border-white/10">
                               Posisikan area lesi kulit kucing di dalam kotak fokus
                             </p>
                           </div>
@@ -802,12 +802,12 @@ const DemoDiagnosis = () => {
 
                     {/* Bottom Shutter Capture Bar */}
                     {isCameraActive && (
-                      <div className="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-center gap-4">
+                      <div className="p-3.5 sm:p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-center">
                         <button
                           type="button"
                           onClick={capturePhoto}
                           disabled={isCapturing}
-                          className="flex items-center gap-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white font-semibold rounded-2xl shadow-lg shadow-blue-500/30 transition-all transform active:scale-95 disabled:opacity-50"
+                          className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-3 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white font-semibold rounded-xl sm:rounded-2xl shadow-lg shadow-blue-500/30 transition-all transform active:scale-95 disabled:opacity-50 text-sm sm:text-base"
                         >
                           <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
                             <div className="w-2.5 h-2.5 bg-white rounded-full" />
