@@ -1,4 +1,4 @@
-﻿/**
+/**
  * API Service untuk CatSkin AI
  * URL relatif â€” request diteruskan lewat Vite proxy ke backend.
  */

@@ -39,11 +39,15 @@ if (-not $tunnelUrl) {
 }
 
 Write-Host "   [OK] Cloudflare Tunnel Aktif: $tunnelUrl" -ForegroundColor Green
-Set-Content -Path $cacheFile -Value $tunnelUrl -Encoding UTF8
+
+# UTF-8 WITHOUT BOM Encoding (CRUCIAL for Vercel JSON parser)
+$utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+[System.IO.File]::WriteAllText($cacheFile, $tunnelUrl, $utf8NoBom)
 
 $needsUpdate = $false
 if (Test-Path $vercelJsonPath) {
-    $currentVercel = Get-Content $vercelJsonPath -Raw
+    $currentVercel = [System.IO.File]::ReadAllText($vercelJsonPath, [System.Text.Encoding]::UTF8)
     if ($currentVercel -notmatch [regex]::Escape($tunnelUrl)) {
         $needsUpdate = $true
     }
@@ -58,34 +62,34 @@ if (-not $needsUpdate) {
 
 Write-Host "   [!] Terdeteksi perubahan URL Tunnel! Memulai auto-sync ke GitHub & Vercel..." -ForegroundColor Yellow
 
-# Update vercel.json
+# Update vercel.json (Without BOM)
 if (Test-Path $vercelJsonPath) {
-    $vContent = Get-Content $vercelJsonPath -Raw
+    $vContent = [System.IO.File]::ReadAllText($vercelJsonPath, [System.Text.Encoding]::UTF8).TrimStart([char]0xFEFF)
     $vUpdated = $vContent -replace 'https://[a-z0-9\-]+\.trycloudflare\.com', $tunnelUrl
-    Set-Content -Path $vercelJsonPath -Value $vUpdated -Encoding UTF8
-    Write-Host "   [1/3] vercel.json diperbarui." -ForegroundColor Cyan
+    [System.IO.File]::WriteAllText($vercelJsonPath, $vUpdated, $utf8NoBom)
+    Write-Host "   [1/3] vercel.json diperbarui (UTF-8 No BOM)." -ForegroundColor Cyan
 }
 
-# Update api.js
+# Update api.js (Without BOM)
 if (Test-Path $apiJsPath) {
-    $aContent = Get-Content $apiJsPath -Raw
+    $aContent = [System.IO.File]::ReadAllText($apiJsPath, [System.Text.Encoding]::UTF8).TrimStart([char]0xFEFF)
     $aUpdated = $aContent -replace 'https://[a-z0-9\-]+\.trycloudflare\.com', $tunnelUrl
-    Set-Content -Path $apiJsPath -Value $aUpdated -Encoding UTF8
+    [System.IO.File]::WriteAllText($apiJsPath, $aUpdated, $utf8NoBom)
     Write-Host "   [2/3] src/services/api.js diperbarui." -ForegroundColor Cyan
 }
 
-# Update admin api.js
+# Update admin api.js (Without BOM)
 if (Test-Path $adminApiJsPath) {
-    $admContent = Get-Content $adminApiJsPath -Raw
+    $admContent = [System.IO.File]::ReadAllText($adminApiJsPath, [System.Text.Encoding]::UTF8).TrimStart([char]0xFEFF)
     $admUpdated = $admContent -replace 'https://[a-z0-9\-]+\.trycloudflare\.com', $tunnelUrl
-    Set-Content -Path $adminApiJsPath -Value $admUpdated -Encoding UTF8
+    [System.IO.File]::WriteAllText($adminApiJsPath, $admUpdated, $utf8NoBom)
     Write-Host "   [3/3] src/admin/api.js diperbarui." -ForegroundColor Cyan
 }
 
 # Git commit and push
 Write-Host "   [*] Mendorong pembaruan ke GitHub (memicu auto-deploy Vercel)..." -ForegroundColor Cyan
 git -C "$frontendDir" add vercel.json src/services/api.js src/admin/api.js
-git -C "$frontendDir" commit -m "Auto-update Cloudflare Tunnel URL to $tunnelUrl"
+git -C "$frontendDir" commit -m "Auto-update Cloudflare Tunnel URL to $tunnelUrl (clean UTF-8)"
 git -C "$frontendDir" push origin main
 
 Write-Host "   [SUKSES] Sinkronisasi selesai! Website Vercel otomatis terhubung ke backend baru." -ForegroundColor Green

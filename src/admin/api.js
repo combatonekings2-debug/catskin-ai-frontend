@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Admin API â€” semua panggilan ke backend CatSkin AI
  * Menggunakan URL relatif agar berjalan lewat Vite proxy (dev)
  * maupun di production tanpa perlu set VITE_API_URL.
