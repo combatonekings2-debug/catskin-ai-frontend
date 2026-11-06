@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://enb-adjustments-applicable-should.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://platinum-futures-boc-pal.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu

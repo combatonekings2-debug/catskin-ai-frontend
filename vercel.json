@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://enb-adjustments-applicable-should.trycloudflare.com/api/:path*"
+      "destination": "https://platinum-futures-boc-pal.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
@@ -10,4 +10,3 @@
     }
   ]
 }
-
