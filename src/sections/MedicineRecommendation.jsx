@@ -154,7 +154,7 @@ const MedicineRecommendation = () => {
               </div>
 
               {expandedCard !== index && (
-                <div className="px-6 pb-5">
+                <div className="px-4 sm:px-6 pt-4 sm:pt-5 pb-4 sm:pb-5">
                   <div className="flex flex-wrap gap-2">
                     {disease.medicines.map((med, i) => (
                       <span key={i} className="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">{med.name}</span>
