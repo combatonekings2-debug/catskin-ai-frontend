@@ -31,10 +31,9 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 xl:gap-12 items-center">
           <div className={`space-y-4 sm:space-y-5 lg:space-y-5 xl:space-y-6 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 bg-gradient-to-r from-blue-100 via-teal-50 to-blue-100 rounded-full text-blue-700 text-xs sm:text-sm font-semibold border border-blue-200/80 shadow-xs animate-slide-up" style={{ animationDelay: '0.2s' }}>
-              <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white text-[10px] sm:text-[11px] font-bold tracking-wide uppercase">AI v2.0</span>
-              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-600" />
-              <span>MobileNetV2 · 5 Kelas Penyakit Kulit Kucing</span>
+            <div className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-1.5 bg-blue-100 rounded-full text-blue-700 text-xs sm:text-sm font-medium animate-slide-up" style={{ animationDelay: '0.2s' }}>
+              <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Powered by CNN MobileNetV2</span>
             </div>
 
             <h1 className="text-2xl sm:text-3xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-bold text-slate-800 leading-tight animate-slide-up" style={{ animationDelay: '0.3s' }}>
@@ -93,10 +92,6 @@ const Hero = () => {
                   loading="eager"
                   className="w-full aspect-square rounded-2xl object-cover shadow-inner"
                 />
-                <div className="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-md text-white rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1.5 shadow-lg border border-white/20">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  <span>Realtime AI Ready</span>
-                </div>
                 <div className="absolute -left-2 sm:-left-4 lg:-left-5 top-1/4 bg-white/95 backdrop-blur-sm rounded-xl p-2.5 sm:p-3 shadow-lg animate-float" style={{ animationDelay: '0.5s' }}>
                   <div className="flex items-center gap-2.5">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-green-100 flex items-center justify-center">

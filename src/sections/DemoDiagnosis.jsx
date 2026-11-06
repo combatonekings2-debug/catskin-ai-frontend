@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { X, Scan, CheckCircle, AlertTriangle, Loader2, Camera, Wifi, WifiOff, Pill, ShieldAlert, Activity, FileText, Image as ImageIcon, RefreshCw, UploadCloud, ExternalLink, Sparkles, Copy, Check, Share2 } from 'lucide-react';
+import { X, Scan, CheckCircle, AlertTriangle, Loader2, Camera, Wifi, WifiOff, Pill, ShieldAlert, Activity, FileText, Image as ImageIcon, RefreshCw, UploadCloud, ExternalLink, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { predictImage, predictMock, isBackendAvailable, predictLocal } from '@/services/api';
@@ -25,7 +25,6 @@ const DemoDiagnosis = () => {
   const [cameraError, setCameraError] = useState(null);
   const [isCameraLoading, setIsCameraLoading] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
-  const [copied, setCopied] = useState(false);
 
   const sectionRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -498,60 +497,6 @@ const DemoDiagnosis = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  const copyDiagnosisSummary = () => {
-    if (!result) return;
-    const dateStr = new Date().toLocaleDateString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    });
-
-    const recs = (result.recommendations || [])
-      .map((r, i) => `${i + 1}. ${r}`)
-      .join('\n');
-
-    const textToCopy = `🐾 LAPORAN HASIL DIAGNOSA CATSKIN AI
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📅 Waktu Analisis: ${dateStr} WIB
-🔬 Arsitektur: CNN MobileNetV2
-
-📌 Kondisi Dominan: ${result.disease} ${result.scientific_name ? `(${result.scientific_name})` : ''}
-🎯 Tingkat Keyakinan: ${result.confidence}%
-⚠️ Tingkat Keparahan: ${result.severity || 'Sedang'}
-
-📋 Temuan Klinis:
-${result.description || '-'}
-
-💊 Rekomendasi Terapi & Penanganan Awal:
-${recs || '-'}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️ Catatan Edukasi:
-Rekomendasi obat & tindakan medis pada sistem CNN ini merupakan informasi awal dan edukasi pertolongan pertama, bukan pengganti diagnosa fisik dokter hewan berlisensi.
-🌐 Website: https://catskin-ai-frontend.vercel.app`;
-
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(textToCopy);
-      } else {
-        const textArea = document.createElement('textarea');
-        textArea.value = textToCopy;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-      }
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    } catch (err) {
-      console.warn('Gagal menyalin:', err);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
-
   return (
     <section id="demo" ref={sectionRef} className="py-10 sm:py-14 lg:py-16 2xl:py-24 bg-white relative overflow-hidden">
       <div className="absolute inset-0">
@@ -833,32 +778,21 @@ Rekomendasi obat & tindakan medis pada sistem CNN ini merupakan informasi awal d
                             </div>
                           </div>
 
-                          {/* Focus reticle box with high-tech laser scanner */}
-                          <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6">
-                            <div className="w-52 h-52 sm:w-64 sm:h-64 2xl:w-80 2xl:h-80 border-2 border-cyan-400/40 rounded-3xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.45)] backdrop-brightness-105 overflow-hidden">
-                              {/* Glowing Corner Brackets */}
-                              <div className="absolute -top-0.5 -left-0.5 w-7 h-7 border-t-4 border-l-4 border-cyan-400 rounded-tl-xl shadow-[0_0_12px_rgba(34,211,238,0.85)]" />
-                              <div className="absolute -top-0.5 -right-0.5 w-7 h-7 border-t-4 border-r-4 border-cyan-400 rounded-tr-xl shadow-[0_0_12px_rgba(34,211,238,0.85)]" />
-                              <div className="absolute -bottom-0.5 -left-0.5 w-7 h-7 border-b-4 border-l-4 border-cyan-400 rounded-bl-xl shadow-[0_0_12px_rgba(34,211,238,0.85)]" />
-                              <div className="absolute -bottom-0.5 -right-0.5 w-7 h-7 border-b-4 border-r-4 border-cyan-400 rounded-br-xl shadow-[0_0_12px_rgba(34,211,238,0.85)]" />
-
-                              {/* Subtle Medical Crosshairs */}
-                              <div className="absolute inset-x-0 top-1/2 h-px bg-cyan-400/20" />
-                              <div className="absolute inset-y-0 left-1/2 w-px bg-cyan-400/20" />
+                          {/* Focus reticle box */}
+                          <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-8">
+                            <div className="w-48 h-48 sm:w-60 sm:h-60 2xl:w-72 2xl:h-72 border-2 border-white/40 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.3)]">
+                              <div className="absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 border-blue-400 rounded-tl" />
+                              <div className="absolute -top-1 -right-1 w-5 h-5 border-t-2 border-r-2 border-blue-400 rounded-tr" />
+                              <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-2 border-l-2 border-blue-400 rounded-bl" />
+                              <div className="absolute -bottom-1 -right-1 w-5 h-5 border-b-2 border-r-2 border-blue-400 rounded-br" />
                               <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-4 h-4 border border-cyan-400/60 rounded-full flex items-center justify-center">
-                                  <div className="w-1.5 h-1.5 bg-cyan-400 rounded-full animate-ping" />
-                                </div>
+                                <div className="w-2 h-2 bg-blue-400/80 rounded-full" />
                               </div>
-
-                              {/* Glowing Laser Scanner Sweep */}
-                              <div className="absolute inset-x-2 h-1 bg-gradient-to-r from-transparent via-cyan-300 to-transparent shadow-[0_0_16px_rgba(34,211,238,1)] animate-scanner pointer-events-none rounded-full" />
                             </div>
                           </div>
 
                           <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none">
-                            <p className="text-xs text-white/95 bg-black/70 backdrop-blur-md inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full shadow-lg border border-white/10">
-                              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+                            <p className="text-xs text-white/90 bg-black/60 backdrop-blur-sm inline-block px-3 py-1 rounded-full shadow">
                               Posisikan area lesi kulit kucing di dalam kotak fokus
                             </p>
                           </div>
@@ -868,20 +802,17 @@ Rekomendasi obat & tindakan medis pada sistem CNN ini merupakan informasi awal d
 
                     {/* Bottom Shutter Capture Bar */}
                     {isCameraActive && (
-                      <div className="p-4 bg-slate-900/95 backdrop-blur-md border-t border-slate-800/80 flex items-center justify-center gap-4">
+                      <div className="p-4 bg-slate-900 border-t border-slate-800 flex items-center justify-center gap-4">
                         <button
                           type="button"
                           onClick={capturePhoto}
                           disabled={isCapturing}
-                          className="relative group flex items-center gap-3 px-8 py-3.5 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-500 hover:from-blue-500 hover:via-cyan-400 hover:to-teal-400 text-white font-semibold rounded-2xl shadow-xl shadow-cyan-500/25 transition-all transform hover:scale-105 active:scale-95 disabled:opacity-50 overflow-hidden cursor-pointer"
+                          className="flex items-center gap-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-500 to-teal-400 hover:from-blue-600 hover:to-teal-500 text-white font-semibold rounded-2xl shadow-lg shadow-blue-500/30 transition-all transform active:scale-95 disabled:opacity-50"
                         >
-                          <span className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-400 to-blue-500 opacity-30 group-hover:opacity-75 blur transition duration-300 animate-pulse pointer-events-none" />
-                          <div className="relative w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
-                            <div className="w-3 h-3 bg-white rounded-full group-hover:scale-125 transition-transform" />
+                          <div className="w-5 h-5 rounded-full border-2 border-white flex items-center justify-center">
+                            <div className="w-2.5 h-2.5 bg-white rounded-full" />
                           </div>
-                          <span className="relative text-sm tracking-wide font-bold">
-                            {isCapturing ? 'Memproses Citra...' : 'Ambil Foto & Analisis AI'}
-                          </span>
+                          <span>{isCapturing ? 'Mengambil Foto...' : 'Ambil Foto Sekarang'}</span>
                         </button>
                       </div>
                     )}
@@ -1114,28 +1045,6 @@ Rekomendasi obat & tindakan medis pada sistem CNN ini merupakan informasi awal d
                   </div>
                   <div className="flex items-center gap-2">
                     <button
-                      type="button"
-                      onClick={copyDiagnosisSummary}
-                      className={`inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 border shadow-xs cursor-pointer ${
-                        copied
-                          ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
-                          : 'bg-white hover:bg-blue-50 text-slate-700 hover:text-blue-600 border-slate-200'
-                      }`}
-                      title="Salin ringkasan diagnosa ke clipboard (WhatsApp / Catatan)"
-                    >
-                      {copied ? (
-                        <>
-                          <Check className="w-4 h-4 text-emerald-600" />
-                          <span>Tersalin!</span>
-                        </>
-                      ) : (
-                        <>
-                          <Copy className="w-4 h-4 text-slate-500" />
-                          <span>Salin Ringkasan</span>
-                        </>
-                      )}
-                    </button>
-                    <button
                       onClick={resetAnalysis}
                       className="p-2.5 hover:bg-slate-100 rounded-full transition-colors text-slate-400 hover:text-slate-700"
                       aria-label="Tutup diagnosa"
@@ -1282,30 +1191,14 @@ Rekomendasi obat & tindakan medis pada sistem CNN ini merupakan informasi awal d
                 </div>
 
                 {/* Tombol Aksi */}
-                <div className="pt-2 flex flex-col sm:flex-row gap-3 lg:gap-4">
-                  <Button
-                    onClick={resetAnalysis}
-                    variant="outline"
-                    className="flex-1 rounded-xl py-5 lg:py-6 border-slate-300 hover:bg-slate-50 font-semibold text-slate-700 text-sm sm:text-base transition-all"
-                  >
+                <div className="pt-2 flex flex-col sm:flex-row gap-4 lg:gap-5">
+                  <Button onClick={resetAnalysis} variant="outline" className="flex-1 rounded-xl py-5 lg:py-6 border-slate-300 hover:bg-slate-50 font-semibold text-slate-700 text-sm sm:text-base">
                     <Scan className="w-4 h-4 mr-2 text-slate-500" />
                     Analisis Foto Lain
                   </Button>
                   <Button
-                    onClick={copyDiagnosisSummary}
-                    variant="outline"
-                    className={`flex-1 rounded-xl py-5 lg:py-6 font-semibold text-sm sm:text-base transition-all cursor-pointer ${
-                      copied
-                        ? 'border-emerald-400 bg-emerald-50 text-emerald-700'
-                        : 'border-blue-200 hover:border-blue-300 text-blue-700 bg-blue-50/50 hover:bg-blue-100/60'
-                    }`}
-                  >
-                    {copied ? <Check className="w-4 h-4 mr-2 text-emerald-600" /> : <Copy className="w-4 h-4 mr-2 text-blue-600" />}
-                    {copied ? 'Ringkasan Laporan Tersalin!' : 'Salin Laporan ke WhatsApp'}
-                  </Button>
-                  <Button
                     onClick={() => document.querySelector('#medicine')?.scrollIntoView({ behavior: 'smooth' })}
-                    className="flex-1 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white rounded-xl py-5 lg:py-6 font-semibold text-sm sm:text-base shadow-md hover:shadow-lg transition-all"
+                    className="flex-1 bg-gradient-to-r from-blue-600 to-teal-500 hover:from-blue-700 hover:to-teal-600 text-white rounded-xl py-5 lg:py-6 font-semibold text-sm sm:text-base shadow-md"
                   >
                     <FileText className="w-4 h-4 mr-2" />
                     Lihat Rekomendasi Obat Lengkap
