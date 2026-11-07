@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://mrna-none-precision-southeast.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://providing-vision-widespread-florists.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu

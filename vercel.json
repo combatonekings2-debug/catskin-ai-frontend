@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://mrna-none-precision-southeast.trycloudflare.com/api/:path*"
+      "destination": "https://providing-vision-widespread-florists.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
