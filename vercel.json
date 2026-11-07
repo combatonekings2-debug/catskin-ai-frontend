@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://consortium-repairs-rangers-take.trycloudflare.com/api/:path*"
+      "destination": "https://hispanic-researchers-differently-peripheral.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
