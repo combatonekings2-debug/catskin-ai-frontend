@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://shortly-skins-restrictions-maybe.trycloudflare.com';
+const DIRECT_BACKEND = 'https://kruger-adaptive-releases-reliable.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
