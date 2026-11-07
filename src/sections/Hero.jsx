@@ -109,8 +109,8 @@ const Hero = () => {
                       <Stethoscope className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                     </div>
                     <div>
-                      <div className="text-xs sm:text-sm font-semibold text-slate-800">drh. Ismail A.</div>
-                      <div className="text-[10px] sm:text-xs text-slate-500">(Konsultan)</div>
+                      <div className="text-xs sm:text-sm font-semibold text-slate-800">Validasi Klinis</div>
+                      <div className="text-[10px] sm:text-xs text-slate-500">(Dokter Hewan)</div>
                     </div>
                   </div>
                 </div>
