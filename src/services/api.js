@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://attached-struggle-competitors-jpeg.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://pirates-cute-episode-held.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu

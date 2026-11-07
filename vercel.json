@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://attached-struggle-competitors-jpeg.trycloudflare.com/api/:path*"
+      "destination": "https://pirates-cute-episode-held.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
