@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://echo-assume-saturn-astrology.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://turner-outcome-logo-protecting.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
