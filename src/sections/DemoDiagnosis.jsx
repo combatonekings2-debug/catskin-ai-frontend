@@ -220,7 +220,7 @@ const DemoDiagnosis = () => {
       recommendations: ['Krim kortison/hidrokortison 1%', 'Antihistamin oral sesuai dosis dokter', 'Identifikasi dan isolasi dari alergen', 'Pembersihan antiseptik rutin'],
       severity: 'Sedang',
       color: 'from-blue-500 to-indigo-600',
-      expert_reference: 'Praktisi Dokter Hewan (Validasi Klinis)',
+      expert_reference: 'drh. Ismail Antarusmara (Banjarnegara, 8 Juli 2026)',
       all_predictions: [
         { disease: 'Dermatitis', confidence: 92.5, color: 'from-blue-500 to-indigo-600', severity: 'Sedang', scientific_name: 'Feline Dermatitis' },
         { disease: 'Flea Allergy', confidence: 3.8, color: 'from-red-500 to-rose-600', severity: 'Tinggi', scientific_name: 'FAD' },
@@ -238,7 +238,7 @@ const DemoDiagnosis = () => {
       recommendations: ['Obat anti-kutu Spot-on (Fluralaner / Fipronil)', 'Krim topikal pereda pruritus/gatal', 'Sterilisasi kasur dan lingkungan kucing', 'Antibiotik jika ada infeksi luka sekunder'],
       severity: 'Tinggi',
       color: 'from-red-500 to-rose-600',
-      expert_reference: 'Praktisi Dokter Hewan (Validasi Klinis)',
+      expert_reference: 'drh. Ismail Antarusmara (Banjarnegara, 8 Juli 2026)',
       all_predictions: [
         { disease: 'Flea Allergy', confidence: 96.8, color: 'from-red-500 to-rose-600', severity: 'Tinggi', scientific_name: 'FAD' },
         { disease: 'Dermatitis', confidence: 1.8, color: 'from-blue-500 to-indigo-600', severity: 'Sedang', scientific_name: 'Feline Dermatitis' },
@@ -256,7 +256,7 @@ const DemoDiagnosis = () => {
       recommendations: ['Pertahankan asupan nutrisi kaya asam lemak omega-3 & 6', 'Rutin sisir bulu dan grooming terjadwal', 'Vaksinasi berkala dan pencegahan parasit rutin', 'Jaga sanitasi tempat bermain dan kandang'],
       severity: 'Normal',
       color: 'from-green-500 to-emerald-600',
-      expert_reference: 'Praktisi Dokter Hewan (Validasi Klinis)',
+      expert_reference: 'drh. Ismail Antarusmara (Banjarnegara, 8 Juli 2026)',
       all_predictions: [
         { disease: 'Healthy', confidence: 98.2, color: 'from-green-500 to-emerald-600', severity: 'Normal', scientific_name: 'Normal' },
         { disease: 'Dermatitis', confidence: 0.9, color: 'from-blue-500 to-indigo-600', severity: 'Sedang', scientific_name: 'Feline Dermatitis' },
@@ -274,7 +274,7 @@ const DemoDiagnosis = () => {
       recommendations: ['Krim antijamur Miconazole/Ketoconazole 2x sehari', 'Antijamur sistemik oral (Itraconazole/Griseofulvin)', 'Isolasi kucing dari manusia dan hewan lain (zoonosis)', 'Disinfeksi kandang, sisir, dan ruangan'],
       severity: 'Sedang',
       color: 'from-amber-500 to-orange-600',
-      expert_reference: 'Praktisi Dokter Hewan (Validasi Klinis)',
+      expert_reference: 'drh. Ismail Antarusmara (Banjarnegara, 8 Juli 2026)',
       all_predictions: [
         { disease: 'Ringworm', confidence: 94.7, color: 'from-amber-500 to-orange-600', severity: 'Sedang', scientific_name: 'Dermatophytosis' },
         { disease: 'Dermatitis', confidence: 2.5, color: 'from-blue-500 to-indigo-600', severity: 'Sedang', scientific_name: 'Feline Dermatitis' },
@@ -292,7 +292,7 @@ const DemoDiagnosis = () => {
       recommendations: ['Akarisida (Selamectin spot-on / Ivermectin resep dokter hewan)', 'Mandi medikasi sulfur/keratolitik berkala', 'Sterilisasi menyeluruh kandang & alas tidur kucing', 'Pengulangan terapi berkala sesuai siklus hidup tungau'],
       severity: 'Tinggi',
       color: 'from-purple-500 to-violet-600',
-      expert_reference: 'Praktisi Dokter Hewan (Validasi Klinis)',
+      expert_reference: 'drh. Ismail Antarusmara (Banjarnegara, 8 Juli 2026)',
       all_predictions: [
         { disease: 'Scabies', confidence: 91.3, color: 'from-purple-500 to-violet-600', severity: 'Tinggi', scientific_name: 'Notoedric Mange' },
         { disease: 'Flea Allergy', confidence: 4.8, color: 'from-red-500 to-rose-600', severity: 'Tinggi', scientific_name: 'FAD' },

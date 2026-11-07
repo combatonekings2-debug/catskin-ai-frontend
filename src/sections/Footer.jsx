@@ -42,7 +42,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Apakah rekomendasi obat di website ini aman langsung digunakan?',
-    a: 'Rekomendasi obat yang kami tampilkan mengacu pada panduan dokter hewan berlisensi sebagai pertolongan pertama dan perawatan sanitasi luar (misal: membersihkan area dengan antiseptik aman hewan atau mengisolasi kucing). Obat sistemik oral wajib diperoleh melalui resep dokter hewan.'
+    a: 'Rekomendasi obat yang kami tampilkan mengacu pada panduan dokter hewan (drh. Ismail Antarusmara) sebagai pertolongan pertama dan perawatan sanitasi luar (misal: membersihkan area dengan antiseptik aman hewan atau mengisolasi kucing). Obat sistemik oral wajib diperoleh melalui resep dokter hewan.'
   },
   {
     q: 'Format gambar dan ukuran apa saja yang didukung?',
