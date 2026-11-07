@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://turner-outcome-logo-protecting.trycloudflare.com/api/:path*"
+      "destination": "https://exception-prison-plots-sas.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
