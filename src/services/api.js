@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://investigated-advertising-cause-feet.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://sing-low-attended-simpson.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu

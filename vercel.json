@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://investigated-advertising-cause-feet.trycloudflare.com/api/:path*"
+      "destination": "https://sing-low-attended-simpson.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
