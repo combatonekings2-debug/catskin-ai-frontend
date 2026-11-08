@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://gras-recovery-funeral-freelance.trycloudflare.com/api/:path*"
+      "destination": "https://cancel-thee-pressure-dave.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
