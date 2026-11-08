@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://decimal-move-connector-andy.trycloudflare.com';
+const DIRECT_BACKEND = 'https://comp-blend-tube-department.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
