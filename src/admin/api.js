@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://mon-arcade-investigate-eos.trycloudflare.com';
+const DIRECT_BACKEND = 'https://lunch-blocking-junior-claims.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
