@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://cancel-thee-pressure-dave.trycloudflare.com';
+const DIRECT_BACKEND = 'https://often-wednesday-bride-exclusively.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
