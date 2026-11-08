@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://kruger-adaptive-releases-reliable.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://controllers-belts-rapids-jurisdiction.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
