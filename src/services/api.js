@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://lunch-blocking-junior-claims.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://decimal-move-connector-andy.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
