@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://comp-blend-tube-department.trycloudflare.com/api/:path*"
+      "destination": "https://lexington-pittsburgh-classic-men.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
