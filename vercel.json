@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://pro-veteran-workout-regression.trycloudflare.com/api/:path*"
+      "destination": "https://spectacular-artificial-princess-facilities.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",

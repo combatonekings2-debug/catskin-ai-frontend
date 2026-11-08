@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://pro-veteran-workout-regression.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://spectacular-artificial-princess-facilities.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
