@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://jump-convergence-inch-download.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://loud-wishing-frederick-adopt.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
