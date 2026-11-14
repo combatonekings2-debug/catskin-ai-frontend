@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://pool-zones-explicit-ons.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://shops-views-fonts-dolls.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
