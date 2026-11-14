@@ -21,7 +21,7 @@ const Features = () => {
 
   const features = [
     { icon: Zap, title: 'Diagnosa Cepat', description: 'Upload foto dan dapatkan hasil analisis dalam hitungan detik.', color: 'from-amber-400 to-orange-500', bgColor: 'bg-amber-50' },
-    { icon: Target, title: 'Akurasi Tinggi', description: 'CNN Model MobileNetV2 dengan tingkat akurasi 75% yang telah dilatih dan dioptimalkan dengan dataset klinis.', color: 'from-blue-500 to-blue-600', bgColor: 'bg-blue-50' },
+    { icon: Target, title: 'Akurasi Tinggi', description: 'CNN Model MobileNetV2 dengan tingkat akurasi 74,12% yang telah dilatih dan dioptimalkan dengan dataset klinis.', color: 'from-blue-500 to-blue-600', bgColor: 'bg-blue-50' },
     { icon: Pill, title: 'Rekomendasi Obat', description: 'Dapatkan saran pengobatan yang tepat berdasarkan hasil diagnosa.', color: 'from-teal-400 to-teal-600', bgColor: 'bg-teal-50' },
     { icon: History, title: 'Riwayat Diagnosa', description: 'Simpan dan pantau perkembangan kondisi kucing Anda.', color: 'from-purple-400 to-purple-600', bgColor: 'bg-purple-50' },
     { icon: HeartPulse, title: 'Panduan Pertolongan Pertama', description: 'Langkah sanitasi darurat, pencegahan penularan (zoonosis), dan isolasi mandiri yang aman sebelum dibawa ke klinik hewan.', color: 'from-rose-400 to-red-500', bgColor: 'bg-rose-50' },

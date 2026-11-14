@@ -4,8 +4,8 @@ import { getDatasetInfo } from '@/services/api';
 
 const Statistics = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [counts, setCounts] = useState({ accuracy: 0, diseases: 0, protocols: 0 });
-  const [targets, setTargets] = useState({ accuracy: 75, diseases: 5, protocols: 15 });
+  const [counts, setCounts] = useState({ accuracy: '0,00', diseases: 0, protocols: 0 });
+  const [targets, setTargets] = useState({ accuracy: 74.12, diseases: 5, protocols: 15 });
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -15,15 +15,15 @@ const Statistics = () => {
         if (data && data.accuracy) {
           setTargets((prev) => ({
             ...prev,
-            accuracy: Math.round(data.accuracy),
+            accuracy: Number(data.accuracy) || 74.12,
             diseases: data.total_classes || 5,
             protocols: 15,
           }));
         }
       })
       .catch(() => {
-        // Fallback default sesuai evaluasi model_kulit_kucing_v2_final.keras (75.22%)
-        setTargets({ accuracy: 75, diseases: 5, protocols: 15 });
+        // Fallback default sesuai evaluasi model_kulit_kucing_v2_final.keras (74.12%)
+        setTargets({ accuracy: 74.12, diseases: 5, protocols: 15 });
       });
   }, []);
 
@@ -51,8 +51,9 @@ const Statistics = () => {
         step++;
         const progress = step / steps;
         const easeOut = 1 - Math.pow(1 - progress, 3);
+        const currentAcc = targets.accuracy * easeOut;
         setCounts({
-          accuracy: Math.round(targets.accuracy * easeOut),
+          accuracy: step >= steps ? '74,12' : currentAcc.toFixed(2).replace('.', ','),
           diseases: Math.round(targets.diseases * easeOut),
           protocols: Math.round(targets.protocols * easeOut),
         });
@@ -71,7 +72,7 @@ const Statistics = () => {
       description: 'Tingkat keakuratan sistem CNN kami',
       color: 'from-green-400 to-emerald-600',
       ringColor: '#10b981',
-      percentage: counts.accuracy, // 75% terisi
+      percentage: typeof counts.accuracy === 'string' ? parseFloat(counts.accuracy.replace(',', '.')) : counts.accuracy, // 74,12% terisi
     },
     {
       label: 'Kondisi Dataset',

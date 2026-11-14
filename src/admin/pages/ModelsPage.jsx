@@ -271,7 +271,7 @@ export default function ModelsPage() {
                           </span>
                           {model.accuracy && (
                             <span className="text-emerald-400 font-semibold">
-                              Akurasi Uji: {model.accuracy.toFixed(1)}%
+                              Akurasi Uji: {model.accuracy.toFixed(2)}%
                             </span>
                           )}
                           {model.epochs && (

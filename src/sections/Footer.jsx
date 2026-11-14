@@ -30,7 +30,7 @@ const DEFAULT_SETTINGS = {
 const FAQ_ITEMS = [
   {
     q: 'Apakah hasil diagnosa CatSkin AI bisa menggantikan dokter hewan?',
-    a: 'Tidak. CatSkin AI dirancang sebagai sarana deteksi dini dan edukasi pertolongan pertama (skrining awal) berbasis model CNN dengan akurasi validasi 75.22%. Untuk penetapan diagnosis definitif, resep antibiotik/antijamur keras, dan tindakan medis lanjut, konsultasikan selalu dengan dokter hewan berizin.'
+    a: 'Tidak. CatSkin AI dirancang sebagai sarana deteksi dini dan edukasi pertolongan pertama (skrining awal) berbasis model CNN dengan akurasi validasi 74,12%. Untuk penetapan diagnosis definitif, resep antibiotik/antijamur keras, dan tindakan medis lanjut, konsultasikan selalu dengan dokter hewan berizin.'
   },
   {
     q: 'Bagaimana cara sistem AI menganalisis penyakit kulit kucing?',

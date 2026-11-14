@@ -12,7 +12,7 @@ const Hero = () => {
   const stats = [
     { value: '1.134', label: 'Citra Dataset (Kaggle & Roboflow)', icon: Database },
     { value: '5', label: 'Kelas Kondisi Kulit', icon: Shield },
-    { value: 'MobileNetV2', label: 'Arsitektur CNN (Uji 75.2%)', icon: Cpu },
+    { value: 'MobileNetV2', label: 'Arsitektur CNN (Uji 74,12%)', icon: Cpu },
   ];
 
   const scrollToSection = (href) => {
@@ -99,7 +99,7 @@ const Hero = () => {
                     </div>
                     <div>
                       <div className="text-xs sm:text-sm font-semibold text-slate-800">MobileNetV2</div>
-                      <div className="text-[10px] sm:text-xs text-slate-500">Akurasi Uji 75.2%</div>
+                      <div className="text-[10px] sm:text-xs text-slate-500">Akurasi Uji 74,12%</div>
                     </div>
                   </div>
                 </div>

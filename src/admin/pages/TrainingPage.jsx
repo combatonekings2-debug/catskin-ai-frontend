@@ -327,7 +327,7 @@ export default function TrainingPage() {
                 {isTraining
                   ? 'Sedang melakukan feed-forward, kalkulasi loss fungsi, dan optimasi gradien bobot model CNN...'
                   : isCompleted
-                  ? `Pelatihan selesai dengan sukses. Akurasi evaluasi validasi terbaik mencapai: ${status?.best_accuracy ? status.best_accuracy.toFixed(1) + '%' : 'Tinggi'}.`
+                  ? `Pelatihan selesai dengan sukses. Akurasi evaluasi validasi terbaik mencapai: ${status?.best_accuracy ? status.best_accuracy.toFixed(2) + '%' : 'Tinggi'}.`
                   : 'Pilih mode dan hyperparameter di sebelah kiri lalu klik tombol Mulai Training.'}
               </p>
               {status?.model_saved && (
