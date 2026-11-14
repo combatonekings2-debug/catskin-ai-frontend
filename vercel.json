@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://shops-views-fonts-dolls.trycloudflare.com/api/:path*"
+      "destination": "https://erik-citations-michel-writer.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
