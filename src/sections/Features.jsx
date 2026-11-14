@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Zap, Target, Pill, History, HeartPulse, Layers, BrainCircuit } from 'lucide-react';
+import { Zap, Target, Pill, Camera, HeartPulse, Layers, BrainCircuit } from 'lucide-react';
 
 const Features = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,7 +23,7 @@ const Features = () => {
     { icon: Zap, title: 'Diagnosa Cepat', description: 'Upload foto dan dapatkan hasil analisis dalam hitungan detik.', color: 'from-amber-400 to-orange-500', bgColor: 'bg-amber-50' },
     { icon: Target, title: 'Akurasi Tinggi', description: 'CNN Model MobileNetV2 dengan tingkat akurasi 74,12% yang telah dilatih dan dioptimalkan dengan dataset klinis.', color: 'from-blue-500 to-blue-600', bgColor: 'bg-blue-50' },
     { icon: Pill, title: 'Rekomendasi Obat', description: 'Dapatkan saran pengobatan yang tepat berdasarkan hasil diagnosa.', color: 'from-teal-400 to-teal-600', bgColor: 'bg-teal-50' },
-    { icon: History, title: 'Riwayat Diagnosa', description: 'Simpan dan pantau perkembangan kondisi kucing Anda.', color: 'from-purple-400 to-purple-600', bgColor: 'bg-purple-50' },
+    { icon: Camera, title: 'Deteksi Kamera Realtime', description: 'Ambil foto area kulit kucing langsung menggunakan kamera HP/laptop secara instan atau pilih dari galeri berkas Anda.', color: 'from-purple-500 to-indigo-600', bgColor: 'bg-purple-50' },
     { icon: HeartPulse, title: 'Panduan Pertolongan Pertama', description: 'Langkah sanitasi darurat, pencegahan penularan (zoonosis), dan isolasi mandiri yang aman sebelum dibawa ke klinik hewan.', color: 'from-rose-400 to-red-500', bgColor: 'bg-rose-50' },
     { icon: Layers, title: 'Klasifikasi 5 Kondisi', description: 'Mendeteksi 5 kondisi kulit: Dermatitis, Flea Allergy, Healthy (Sehat), Ringworm (Kurap), dan Scabies (Kudis).', color: 'from-indigo-400 to-indigo-600', bgColor: 'bg-indigo-50' },
   ];
