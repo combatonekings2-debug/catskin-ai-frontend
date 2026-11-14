@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://charges-jurisdiction-results-veteran.trycloudflare.com/api/:path*"
+      "destination": "https://pool-zones-explicit-ons.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
