@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://situation-dynamic-manual-shall.trycloudflare.com/api/:path*"
+      "destination": "https://flyer-bishop-economies-pale.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
