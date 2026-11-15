@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://yearly-newton-drug-ventures.trycloudflare.com/api/:path*"
+      "destination": "https://commissioner-bug-them-resistant.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
