@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://commissioner-bug-them-resistant.trycloudflare.com/api/:path*"
+      "destination": "https://times-bachelor-mozilla-omissions.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
