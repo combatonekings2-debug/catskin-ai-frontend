@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://times-bachelor-mozilla-omissions.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://word-weed-extras-barcelona.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
