@@ -32,7 +32,6 @@ const DemoDiagnosis = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
   const streamRef = useRef(null);
-  const focusBoxRef = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -86,9 +85,7 @@ const DemoDiagnosis = () => {
   };
 
   const handleFileUpload = (event) => {
-    const file = event.target.files?.[0];
-    validateAndSetFile(file);
-    if (event.target) event.target.value = '';
+    validateAndSetFile(event.target.files?.[0]);
   };
 
   // Drag & drop handlers
@@ -183,17 +180,23 @@ const DemoDiagnosis = () => {
           prediction = response.data;
         }
       } catch (backendErr) {
-        console.warn('Backend gagal dipanggil saat analisis:', backendErr);
-        setBackendAvailable(false);
-        clearInterval(interval);
-        setIsAnalyzing(false);
-        setAnalysisProgress(0);
-        setError(
-          backendErr instanceof Error && backendErr.message
-            ? `Gagal menganalisis lewat server AI: ${backendErr.message}. Pastikan backend aktif lalu coba lagi.`
-            : 'Gagal terhubung ke server AI backend. Pastikan server backend & tunnel aktif, lalu coba lagi.'
-        );
-        return;
+        console.warn('Backend gagal dipanggil, fallback ke simulasi:', backendErr);
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        const visualCheck = await analyzeImageOrganicRatio(uploadedImage);
+        if (visualCheck && !visualCheck.isVisuallyPlausible) {
+          prediction = {
+            is_valid_cat_skin: false,
+            message: 'Foto tidak terdeteksi sebagai kulit kucing yang valid. Sistem mendeteksi bahwa gambar yang Anda unggah bukan merupakan area lesi kulit atau bulu kucing.',
+            validation_details: {
+              reasons: [
+                `Karakteristik tekstur dan spektrum warna biologis kulit/bulu kucing tidak terdeteksi (rasio: ${visualCheck.organicRatio.toFixed(1)}%).`,
+                visualCheck.darkRatio > 35 ? `Foto didominasi area gelap/bayangan (${visualCheck.darkRatio.toFixed(1)}%).` : 'Komposisi foto tidak menunjukkan pola lesi kulit kucing.',
+              ],
+            },
+          };
+        } else {
+          prediction = predictLocal();
+        }
       }
 
       clearInterval(interval);
@@ -404,64 +407,18 @@ const DemoDiagnosis = () => {
     setIsCapturing(true);
 
     const canvas = canvasRef.current || document.createElement('canvas');
-    const vw = video.videoWidth || 640;
-    const vh = video.videoHeight || 480;
-
-    // Hitung area crop presisi sesuai kotak fokus (focus reticle box) agar background/bezel di luar kotak tidak ikut ter-scan AI
-    let sx = 0;
-    let sy = 0;
-    let sw = vw;
-    let sh = vh;
-
-    const focusEl = focusBoxRef.current;
-    const vRect = video.getBoundingClientRect();
-    if (focusEl && vRect.width > 0 && vRect.height > 0) {
-      const fRect = focusEl.getBoundingClientRect();
-      // Video memakai CSS object-cover: hitung skala seragam & offset crop-nya
-      const scale = Math.max(vRect.width / vw, vRect.height / vh);
-      const offsetX = (vw * scale - vRect.width) / 2;
-      const offsetY = (vh * scale - vRect.height) / 2;
-
-      const fx = fRect.left - vRect.left;
-      const fy = fRect.top - vRect.top;
-
-      sx = (fx + offsetX) / scale;
-      sy = (fy + offsetY) / scale;
-      sw = fRect.width / scale;
-      sh = fRect.height / scale;
-
-      if (cameraFacingMode === 'user') {
-        sx = vw - sx - sw;
-      }
-
-      // Clamp agar selalu aman di dalam batas frame video
-      sx = Math.max(0, Math.min(vw - 1, sx));
-      sy = Math.max(0, Math.min(vh - 1, sy));
-      sw = Math.max(1, Math.min(vw - sx, sw));
-      sh = Math.max(1, Math.min(vh - sy, sh));
-    } else {
-      // Fallback: crop persegi di tengah (72% sisi terpendek)
-      const side = Math.round(Math.min(vw, vh) * 0.72);
-      sx = Math.round((vw - side) / 2);
-      sy = Math.round((vh - side) / 2);
-      sw = side;
-      sh = side;
-    }
-
-    // Output persegi 512x512 agar cocok langsung ke input 224x224 CNN tanpa bar padding abu-abu
-    const outSize = 512;
-    canvas.width = outSize;
-    canvas.height = outSize;
+    const width = video.videoWidth || 640;
+    const height = video.videoHeight || 480;
+    canvas.width = width;
+    canvas.height = height;
 
     const ctx = canvas.getContext('2d');
     if (ctx) {
-      ctx.save();
       if (cameraFacingMode === 'user') {
-        ctx.translate(outSize, 0);
+        ctx.translate(width, 0);
         ctx.scale(-1, 1);
       }
-      ctx.drawImage(video, sx, sy, sw, sh, 0, 0, outSize, outSize);
-      ctx.restore();
+      ctx.drawImage(video, 0, 0, width, height);
     }
 
     setTimeout(() => {
@@ -823,7 +780,7 @@ const DemoDiagnosis = () => {
 
                           {/* Focus reticle box */}
                           <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6 sm:p-8">
-                            <div ref={focusBoxRef} className="w-56 h-56 sm:w-64 sm:h-64 2xl:w-72 2xl:h-72 border-2 border-white/50 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.35)]">
+                            <div className="w-56 h-56 sm:w-64 sm:h-64 2xl:w-72 2xl:h-72 border-2 border-white/50 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.35)]">
                               <div className="absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 border-blue-400 rounded-tl" />
                               <div className="absolute -top-1 -right-1 w-5 h-5 border-t-2 border-r-2 border-blue-400 rounded-tr" />
                               <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-2 border-l-2 border-blue-400 rounded-bl" />
