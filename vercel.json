@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://professional-referenced-sum-badly.trycloudflare.com/api/:path*"
+      "destination": "https://hardware-dream-neck-anthropology.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
