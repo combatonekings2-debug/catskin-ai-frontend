@@ -596,6 +596,16 @@ const DemoDiagnosis = () => {
                       <p className="text-xs sm:text-sm text-slate-400">Format: JPG, PNG, WebP · Maks. 5MB</p>
                     </div>
 
+                    {/* Tips Akurasi: Ambil foto jarak dekat / crop */}
+                    <div className="mt-3.5 p-3 sm:p-3.5 bg-amber-50/90 border border-amber-200/80 rounded-xl text-left flex items-start gap-2.5 shadow-sm">
+                      <div className="p-1 bg-amber-100 text-amber-700 rounded-md shrink-0 mt-0.5">
+                        <Sparkles className="w-3.5 h-3.5" />
+                      </div>
+                      <div className="text-xs text-amber-900 leading-relaxed">
+                        <strong className="font-semibold text-amber-950">Tips Akurasi Diagnosa:</strong> Pastikan mengunggah foto <strong>jarak dekat (close-up)</strong> atau memotong (crop) tepat pada area luka/bercak kucing. Jika mengunggah foto seluruh tubuh atau wajah penuh, area bulu sehat di sekitarnya akan mendominasi dan dapat terdeteksi sebagai <em>Healthy</em>.
+                      </div>
+                    </div>
+
                     {/* Tombol alternatif langsung buka kamera */}
                     <div className="mt-4 text-center">
                       <button
