@@ -40,7 +40,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://air-blah-butter-yes.trycloudflare.com/api/:path*"
+      "destination": "https://blanket-range-figure-frankfurt.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",

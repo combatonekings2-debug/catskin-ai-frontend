@@ -4,7 +4,7 @@
  */
 
 const API_BASE_URL = '/api';
-const DIRECT_BACKEND_URL = 'https://air-blah-butter-yes.trycloudflare.com/api';
+const DIRECT_BACKEND_URL = 'https://blanket-range-figure-frankfurt.trycloudflare.com/api';
 
 async function requestWithFallback(endpoint, options = {}) {
   // Coba lewat proxy terlebih dahulu
