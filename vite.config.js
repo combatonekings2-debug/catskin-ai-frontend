@@ -15,7 +15,7 @@ const customDomainBanner = () => ({
 });
 
 export default defineConfig({
-  base: './',
+  base: '/',
   plugins: [react(), customDomainBanner()],
   server: {
     allowedHosts: true,

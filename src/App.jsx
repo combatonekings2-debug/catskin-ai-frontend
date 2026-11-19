@@ -2,33 +2,34 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 
-const Navigation = lazy(() => import('./sections/Navigation'));
-const Hero = lazy(() => import('./sections/Hero'));
-const Features = lazy(() => import('./sections/Features'));
-const HowItWorks = lazy(() => import('./sections/HowItWorks'));
-const DiseaseTypes = lazy(() => import('./sections/DiseaseTypes'));
-const DemoDiagnosis = lazy(() => import('./sections/DemoDiagnosis'));
-const MedicineRecommendation = lazy(() => import('./sections/MedicineRecommendation'));
-const Statistics = lazy(() => import('./sections/Statistics'));
-const Footer = lazy(() => import('./sections/Footer'));
+// Import komponen landing page secara langsung untuk menghindari chunk loading waterfalls & layar putih di mobile
+import Navigation from './sections/Navigation';
+import Hero from './sections/Hero';
+import Features from './sections/Features';
+import HowItWorks from './sections/HowItWorks';
+import DiseaseTypes from './sections/DiseaseTypes';
+import DemoDiagnosis from './sections/DemoDiagnosis';
+import MedicineRecommendation from './sections/MedicineRecommendation';
+import Statistics from './sections/Statistics';
+import Footer from './sections/Footer';
+
+// Hanya halaman Admin (yang berukuran besar ~550KB) yang di-lazy load
 const AdminDashboard = lazy(() => import('./admin/AdminDashboard'));
 
 function HomePage() {
   return (
     <div className="min-h-screen bg-slate-50 overflow-x-hidden">
-      <Suspense fallback={null}>
-        <Navigation />
-        <main className="relative z-10">
-          <Hero />
-          <Suspense fallback={<div className="h-96" />}><Features /></Suspense>
-          <Suspense fallback={<div className="h-96" />}><HowItWorks /></Suspense>
-          <Suspense fallback={<div className="h-96" />}><DiseaseTypes /></Suspense>
-          <Suspense fallback={<div className="h-96" />}><DemoDiagnosis /></Suspense>
-          <Suspense fallback={<div className="h-96" />}><MedicineRecommendation /></Suspense>
-          <Suspense fallback={<div className="h-96" />}><Statistics /></Suspense>
-          <Suspense fallback={<div className="h-24" />}><Footer /></Suspense>
-        </main>
-      </Suspense>
+      <Navigation />
+      <main className="relative z-10">
+        <Hero />
+        <Features />
+        <HowItWorks />
+        <DiseaseTypes />
+        <DemoDiagnosis />
+        <MedicineRecommendation />
+        <Statistics />
+        <Footer />
+      </main>
     </div>
   );
 }
@@ -37,15 +38,21 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/admin/*" element={
-        <Suspense fallback={
-          <div className="min-h-screen bg-slate-900 flex items-center justify-center">
-            <div className="text-white text-lg">Loading Admin...</div>
-          </div>
-        }>
-          <AdminDashboard />
-        </Suspense>
-      } />
+      <Route
+        path="/admin/*"
+        element={
+          <Suspense
+            fallback={
+              <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center p-4">
+                <div className="w-10 h-10 border-4 border-slate-700 border-t-blue-500 rounded-full animate-spin mb-4" />
+                <div className="text-white text-base font-medium">Memuat Dashboard Admin...</div>
+              </div>
+            }
+          >
+            <AdminDashboard />
+          </Suspense>
+        }
+      />
     </Routes>
   );
 }
