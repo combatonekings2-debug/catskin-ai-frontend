@@ -25,6 +25,7 @@ const DemoDiagnosis = () => {
   const [cameraError, setCameraError] = useState(null);
   const [isCameraLoading, setIsCameraLoading] = useState(false);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [isFocusLocked, setIsFocusLocked] = useState(false);
 
   const sectionRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -353,8 +354,9 @@ const DemoDiagnosis = () => {
         stream = await navigator.mediaDevices.getUserMedia({
           video: {
             facingMode: { ideal: facing },
-            width: { ideal: 1280 },
-            height: { ideal: 720 },
+            width: { ideal: 1920, min: 1280 },
+            height: { ideal: 1080, min: 720 },
+            focusMode: { ideal: 'continuous' },
           },
           audio: false,
         });
@@ -374,6 +376,27 @@ const DemoDiagnosis = () => {
           console.warn('Video play interrupted:', playErr);
         }
       }
+
+      // Aktifkan continuous autofocus & auto-exposure perangkat jika didukung
+      const track = stream.getVideoTracks()[0];
+      if (track && track.getCapabilities) {
+        try {
+          const caps = track.getCapabilities();
+          const advanced = [];
+          if (caps.focusMode && caps.focusMode.includes('continuous')) {
+            advanced.push({ focusMode: 'continuous' });
+          }
+          if (caps.exposureMode && caps.exposureMode.includes('continuous')) {
+            advanced.push({ exposureMode: 'continuous' });
+          }
+          if (advanced.length > 0) {
+            await track.applyConstraints({ advanced });
+          }
+        } catch (e) {
+          console.warn('Hardware focus constraints note:', e);
+        }
+      }
+
       setIsCameraActive(true);
       setIsCameraLoading(false);
       setCameraFacingMode(facing);
@@ -400,6 +423,27 @@ const DemoDiagnosis = () => {
     startCamera(nextFacing);
   }, [cameraFacingMode, startCamera]);
 
+  // Kunci fokus kamera pada titik/kotak yang dibidik saat layar diketuk
+  const triggerFocus = useCallback(async () => {
+    setIsFocusLocked(true);
+    const track = streamRef.current?.getVideoTracks()?.[0];
+    if (track && track.getCapabilities) {
+      try {
+        const caps = track.getCapabilities();
+        if (caps.focusMode && caps.focusMode.includes('continuous')) {
+          await track.applyConstraints({
+            advanced: [{ focusMode: 'continuous' }]
+          });
+        }
+      } catch (err) {
+        console.warn('Focus trigger note:', err);
+      }
+    }
+    setTimeout(() => {
+      setIsFocusLocked(false);
+    }, 1800);
+  }, []);
+
   const capturePhoto = useCallback(() => {
     const video = videoRef.current;
     if (!video || !isCameraActive) return;
@@ -407,8 +451,8 @@ const DemoDiagnosis = () => {
     setIsCapturing(true);
 
     const canvas = canvasRef.current || document.createElement('canvas');
-    const width = video.videoWidth || 640;
-    const height = video.videoHeight || 480;
+    const width = video.videoWidth || 1280;
+    const height = video.videoHeight || 720;
     canvas.width = width;
     canvas.height = height;
 
@@ -418,6 +462,7 @@ const DemoDiagnosis = () => {
         ctx.translate(width, 0);
         ctx.scale(-1, 1);
       }
+      // Simpan citra penuh (Full Frame tanpa di-crop) sesuai permintaan pengguna
       ctx.drawImage(video, 0, 0, width, height);
     }
 
@@ -627,7 +672,7 @@ const DemoDiagnosis = () => {
                 {inputMode === 'camera' && (
                   <div className="relative rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-xl flex flex-col">
                     {/* Live Viewfinder - Tampilan Kamera Tinggi & Imersif untuk Mobile (3:4 portrait) */}
-                    <div className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[16/10] bg-black flex items-center justify-center overflow-hidden">
+                    <div onClick={triggerFocus} className="relative w-full aspect-[3/4] sm:aspect-[4/3] md:aspect-[16/10] bg-black flex items-center justify-center overflow-hidden cursor-crosshair">
                       <video
                         ref={videoRef}
                         autoPlay
@@ -788,22 +833,42 @@ const DemoDiagnosis = () => {
                             </div>
                           </div>
 
-                          {/* Focus reticle box */}
+                          {/* Focus reticle box with active focus feedback */}
                           <div className="absolute inset-0 pointer-events-none flex items-center justify-center p-6 sm:p-8">
-                            <div className="w-56 h-56 sm:w-64 sm:h-64 2xl:w-72 2xl:h-72 border-2 border-white/50 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.35)]">
-                              <div className="absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 border-blue-400 rounded-tl" />
-                              <div className="absolute -top-1 -right-1 w-5 h-5 border-t-2 border-r-2 border-blue-400 rounded-tr" />
-                              <div className="absolute -bottom-1 -left-1 w-5 h-5 border-b-2 border-l-2 border-blue-400 rounded-bl" />
-                              <div className="absolute -bottom-1 -right-1 w-5 h-5 border-b-2 border-r-2 border-blue-400 rounded-br" />
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div className="w-2.5 h-2.5 bg-blue-400/80 rounded-full" />
+                            <div
+                              className={`w-56 h-56 sm:w-64 sm:h-64 2xl:w-72 2xl:h-72 border-2 rounded-2xl relative shadow-[0_0_0_9999px_rgba(0,0,0,0.38)] transition-all duration-300 ${
+                                isFocusLocked
+                                  ? 'border-emerald-400 shadow-[0_0_20px_rgba(52,211,153,0.45),0_0_0_9999px_rgba(0,0,0,0.38)] scale-[1.02]'
+                                  : 'border-white/60'
+                              }`}
+                            >
+                              {/* Corner Brackets */}
+                              <div className={`absolute -top-1 -left-1 w-5 h-5 border-t-2 border-l-2 rounded-tl transition-colors duration-200 ${isFocusLocked ? 'border-emerald-400' : 'border-blue-400'}`} />
+                              <div className={`absolute -top-1 -right-1 w-5 h-5 border-t-2 border-r-2 rounded-tr transition-colors duration-200 ${isFocusLocked ? 'border-emerald-400' : 'border-blue-400'}`} />
+                              <div className={`absolute -bottom-1 -left-1 w-5 h-5 border-b-2 border-l-2 rounded-bl transition-colors duration-200 ${isFocusLocked ? 'border-emerald-400' : 'border-blue-400'}`} />
+                              <div className={`absolute -bottom-1 -right-1 w-5 h-5 border-b-2 border-r-2 rounded-br transition-colors duration-200 ${isFocusLocked ? 'border-emerald-400' : 'border-blue-400'}`} />
+                              
+                              {/* Center Target & Status */}
+                              <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5">
+                                <div className={`w-3 h-3 rounded-full transition-all duration-200 ${isFocusLocked ? 'bg-emerald-400 animate-ping' : 'bg-blue-400/80'}`} />
+                                {isFocusLocked ? (
+                                  <span className="px-2 py-0.5 bg-emerald-500/90 text-white text-[10px] font-bold tracking-wider rounded-md uppercase animate-pulse">
+                                    AF LOCK
+                                  </span>
+                                ) : (
+                                  <span className="text-[10px] text-white/70 font-medium tracking-wide">
+                                    Titik Fokus
+                                  </span>
+                                )}
                               </div>
                             </div>
                           </div>
 
                           <div className="absolute bottom-3 left-0 right-0 text-center pointer-events-none px-4">
-                            <p className="text-xs text-white/95 bg-black/70 backdrop-blur-sm inline-block px-3.5 py-1.5 rounded-full shadow border border-white/10">
-                              Posisikan area lesi kulit kucing di dalam kotak fokus
+                            <p className="text-xs text-white/95 bg-black/75 backdrop-blur-sm inline-block px-3.5 py-1.5 rounded-full shadow border border-white/10">
+                              {isFocusLocked
+                                ? '✓ Fokus kamera terkunci pada kotak bidik'
+                                : '💡 Dekatkan kamera (10–20 cm) agar luka mengisi kotak. Ketuk layar untuk kunci fokus.'}
                             </p>
                           </div>
                         </>
