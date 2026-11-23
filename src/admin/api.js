@@ -5,7 +5,7 @@
  */
 
 const BASE = import.meta.env.VITE_API_URL || '';
-const DIRECT_BACKEND = 'https://pencil-timing-signs-has.trycloudflare.com';
+const DIRECT_BACKEND = 'https://parents-delhi-processes-studios.trycloudflare.com';
 
 async function request(path, options = {}) {
   const fetchOptions = {
