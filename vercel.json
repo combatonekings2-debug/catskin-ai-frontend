@@ -40,7 +40,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://crm-formal-saving-romantic.trycloudflare.com/api/:path*"
+      "destination": "https://pan-shoes-measures-apparently.trycloudflare.com/api/:path*"
     },
     {
       "source": "/(.*)",
